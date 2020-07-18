@@ -6,6 +6,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+  },
+  {
+    path: 'students/:id',
+    loadChildren: () => import('./pages/students/students.module').then( m => m.StudentsPageModule)
+  },
+  {
+    path: 'student/:id',
+    loadChildren: () => import('./pages/student/student.module').then( m => m.StudentPageModule)
   }
 ];
 

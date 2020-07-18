@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Estudiantes</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar placeholder="Buscar" inputmode="text" autocorrect="on" (ionChange)="onSearchChange($event)"></ion-searchbar>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>
+                Filtrar por:
+            </ion-label>
+        </ion-list-header>
+        <ion-item>
+            <ion-select placeholder="Select One" value="name" (ionChange)="change($event)">
+                <ion-select-option value="name">Nombre</ion-select-option>
+                <ion-select-option value="matricula">Matrícula</ion-select-option>
+                <ion-select-option value="group">Grupo</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <!-- <ion-list-header>
+            <ion-label class="ion-text-center">
+                Estudiantes por dos
+            </ion-label>
+        </ion-list-header> -->
+        <ion-item-divider>
+            <ion-label>
+                Listado de estudiantes
+            </ion-label>
+        </ion-item-divider>
+        <ion-item *ngFor="let student of students | studentsFilter:qry:filterBy" detail (click)="studentDetails(student.id)">
+            <ion-avatar slot="start">
+                <img [src]="student.img">
+            </ion-avatar>
+            <ion-label> {{student.name}} </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

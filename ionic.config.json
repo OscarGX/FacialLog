@@ -1,5 +1,7 @@
 {
   "name": "FacialLog",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

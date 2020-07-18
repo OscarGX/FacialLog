@@ -1,0 +1,136 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Estudiante</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="exist">
+        <ion-card-header>
+            <ion-img src="assets/images/404-not-found.jpg"></ion-img>
+        </ion-card-header>
+        <ion-card-content>
+            Ups! No se pudo encontrar el alumno, intente nuevamente.
+        </ion-card-content>
+    </ion-card>
+    <!-- <ion-card *ngIf="student" color="light">
+        <ion-card-header> -->
+    <!-- <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+            <ion-card-title>Awesome Title</ion-card-title> -->
+    <!-- <div class="img-container">
+                <img [src]="student.img" class="custom-img">
+            </div> -->
+    <!-- <img [src]="student.img">
+        </ion-card-header> -->
+    <!-- <ion-card-content> -->
+    <!-- <ion-thumbnail>
+                <ion-img [src]="student.img"></ion-img>
+            </ion-thumbnail> -->
+    <!-- <ion-text>
+                <strong>Nombre: </strong> {{student.name}}
+                <br>
+                <strong>Matrícula: </strong> {{student.matricula}}
+                <br>
+                <strong>Grupo: </strong> {{student.group}}
+                <br>
+                <strong>Número de teléfono: </strong> {{student.phoneNumber}}
+            </ion-text>
+        </ion-card-content>
+    </ion-card> -->
+    <!-- <ion-grid fixed>
+        <ion-row *ngIf="student">
+            <ion-col size="5" class="img-container">
+                <img [src]="student.img">
+            </ion-col>
+            <ion-col size="7"> -->
+    <!-- <ion-text>
+                    <strong>Nombre: </strong> {{student.name}}
+                </ion-text>
+
+                <ion-text>
+                    <strong>Matrícula: </strong> {{student.matricula}}
+                </ion-text>
+
+                <ion-text>
+                    <strong>Grupo: </strong> {{student.group}}
+                </ion-text>
+
+                <ion-text>
+                    <strong>Número de teléfono: </strong> {{student.phoneNumber}}
+                </ion-text> -->
+    <!-- <ion-item color="light">
+                    <ion-text>
+                        <strong>Nombre: </strong> {{student.name}}
+                    </ion-text>
+                </ion-item>
+                <ion-item color="light">
+                    <ion-text>
+                        <strong>Matrícula: </strong> {{student.matricula}}
+                    </ion-text>
+                </ion-item>
+                <ion-item color="light">
+                    <ion-text>
+                        <strong>Grupo: </strong> {{student.group}}
+                    </ion-text>
+                </ion-item>
+                <ion-item color="light">
+                    <ion-text>
+                        <strong>Número de teléfono: </strong> {{student.phoneNumber}}
+                    </ion-text>
+                </ion-item>
+            </ion-col>
+        </ion-row> -->
+    <!-- <ion-row *ngIf="student">
+            <ion-col>
+                <ion-text>
+                    <strong>Nombre: </strong> {{student.name}}
+                    <br>
+                    <strong>Matrícula: </strong> {{student.matricula}}
+                    <br>
+                    <strong>Grupo: </strong> {{student.group}}
+                    <br>
+                    <strong>Número de teléfono: </strong> {{student.phoneNumber}}
+                </ion-text>
+            </ion-col>
+        </ion-row> -->
+    <!-- </ion-grid> -->
+    <ion-grid fixed>
+        <ion-row *ngIf="student" class="img-container">
+            <ion-col size="6">
+                <img [src]="student.img">
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="student">
+            <ion-col>
+                <ion-item color="light">
+                    <ion-text>
+                        <strong>Nombre: </strong> {{student.name}}
+                    </ion-text>
+                </ion-item>
+                <ion-item color="light">
+                    <ion-text>
+                        <strong>Matrícula: </strong> {{student.matricula}}
+                    </ion-text>
+                </ion-item>
+                <ion-item color="light">
+                    <ion-text>
+                        <strong>Grupo: </strong> {{student.group}}
+                    </ion-text>
+                </ion-item>
+                <ion-item color="light">
+                    <ion-text>
+                        <strong>Número de teléfono: </strong> {{student.phoneNumber}}
+                    </ion-text>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed" (click)="takePicture()" *ngIf="student">
+        <ion-fab-button color="primary" *ngIf="student.faceId !== 'not today flash'">
+            <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

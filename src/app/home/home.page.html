@@ -1,20 +1,46 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Programas educativos
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+    <!-- <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Blank</ion-title>
+        </ion-toolbar>
+    </ion-header> -->
+    <ion-searchbar placeholder="Buscar carrera" inputmode="text" autocorrect="on" (ionChange)="onSearchChange($event)"></ion-searchbar>
+    <ion-toolbar color="light" #tolb>
+        <ion-segment (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="todos">
+                <ion-label>Todos</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="tsu">
+                <ion-label>TSU</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="ing">
+                <ion-label>ING</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="lic">
+                <ion-label>LIC</ion-label>
+            </ion-segment-button>
+        </ion-segment>
     </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <ion-card *ngFor="let career of careers | searchFilter:query:filterType" [color]="career.color" (click)="students(career.id)">
+        <ion-card-header>
+            <ion-card-title>{{career.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-text *ngIf="career.area">
+                <strong>Área: </strong>{{career.area}}
+            </ion-text>
+            <br>
+            <ion-text>
+                <strong>Modalidad: </strong>{{career.modality | uppercase}}
+            </ion-text>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
