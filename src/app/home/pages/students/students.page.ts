@@ -1,28 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentsService } from '../../../services/students.service';
 import { Student } from '../../../models/student.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.page.html',
   styleUrls: ['./students.page.scss'],
 })
-export class StudentsPage implements OnInit {
+export class StudentsPage implements OnInit, OnDestroy {
   id: string;
   students: Student[] = [];
   filterBy = 'name';
   qry = '';
+  isEmpty = false;
+  studentsCollRef: Subscription;
   constructor(private route: ActivatedRoute, private ss: StudentsService, private router: Router) {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.ss.getStudents(this.id).subscribe(data => {
+    this.studentsCollRef = this.ss.getStudents(this.id).subscribe(data => {
       if (data !== null || data !== undefined) {
         this.students = data;
+        this.isEmpty = data.length > 0;
       }
     });
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.studentsCollRef.unsubscribe();
   }
 
   change(event) {

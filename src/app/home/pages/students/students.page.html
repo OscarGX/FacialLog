@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="isEmpty">
     <ion-searchbar placeholder="Buscar" inputmode="text" autocorrect="on" (ionChange)="onSearchChange($event)"></ion-searchbar>
     <ion-list>
         <ion-list-header>
@@ -41,4 +41,9 @@
             <ion-label> {{student.name}} </ion-label>
         </ion-item>
     </ion-list>
+</ion-content>
+<ion-content *ngIf="!isEmpty">
+    <ion-item class="ion-text-center" lines="none">
+        <ion-label>No hay información que mostrar</ion-label>
+    </ion-item>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StudentsService } from '../../../services/students.service';
 import { ActivatedRoute } from '@angular/router';
 import { Student } from '../../../models/student.model';
@@ -6,15 +6,17 @@ import { FaceApiService } from 'src/app/services/face-api.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { VerifyAPIRequest } from '../../../models/verify-request.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-student',
   templateUrl: './student.page.html',
   styleUrls: ['./student.page.scss'],
 })
-export class StudentPage implements OnInit {
+export class StudentPage implements OnInit, OnDestroy{
   student: Student;
   exist = false;
+  exp = false;
   options: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -23,11 +25,12 @@ export class StudentPage implements OnInit {
     targetHeight: 1080,
     targetWidth: 1920
   };
+  studentCollRef: Subscription;
 
   constructor(private ss: StudentsService, private route: ActivatedRoute, private fas: FaceApiService, private camera: Camera,
               private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
     const id = this.route.snapshot.paramMap.get('id');
-    this.ss.getStudentById(id).subscribe(data => {
+    this.studentCollRef = this.ss.getStudentById(id).subscribe(data => {
       if (!data.payload.exists) {
         this.exist = true;
       } else {
@@ -41,11 +44,16 @@ export class StudentPage implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.studentCollRef.unsubscribe();
+  }
+
   private verify() {
     if (this.student.faceId === 'not today flash') {
       this.generateFaceData();
     } else {
       if (this.faceIdExpires()) {
+        this.exp = true;
         this.generateFaceData();
       }
     }
@@ -66,6 +74,7 @@ export class StudentPage implements OnInit {
       if (data.length > 0) {
         this.student.expiresIn = this.getExpiresIn();
         this.student.faceId = data[0].faceId;
+        this.exp = false;
         this.updateStudentData();
       } else {
         console.log('la imagen no es válida');
