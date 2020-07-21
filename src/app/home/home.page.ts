@@ -35,7 +35,7 @@ export class HomePage implements OnInit {
   }
 
   students(id: string) {
-    this.router.navigateByUrl(`/students/${id}`);
+    this.router.navigateByUrl(`/groups/${id}`);
   }
 
 }

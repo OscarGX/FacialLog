@@ -137,14 +137,14 @@ export class StudentPage implements OnInit, OnDestroy{
       this.loadingCtrl.dismiss();
       if (data.isIdentical) {
         msg = `
-        Bien! El estudiante ${this.student.name} coincide con la foto tomada.
-        Nivel de confianza: ${Math.floor(data.confidence * 100)}%
+        Bien! El estudiante <strong> ${this.student.name} </strong> coincide con la foto tomada. <br>
+        <strong> Nivel de confianza: ${Math.floor(data.confidence * 100)}% </strong>
         `;
         this.presentAlert('Aceptado', msg);
       } else {
         msg = `
-        Uy! El estudiante ${this.student.name} no coincide con la foto tomada.
-        Nivel de confianza: ${Math.floor(data.confidence * 100)}%
+        Uy! El estudiante <strong> ${this.student.name} <trong> no coincide con la foto tomada. <br>
+        <strong> Nivel de confianza: ${Math.floor(data.confidence * 100)}% </strong>
         `;
         this.presentAlert('Rechazado', msg);
       }

@@ -10,15 +10,15 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./students.page.scss'],
 })
 export class StudentsPage implements OnInit, OnDestroy {
-  id: string;
+  group: string;
   students: Student[] = [];
   filterBy = 'name';
   qry = '';
   isEmpty = false;
   studentsCollRef: Subscription;
   constructor(private route: ActivatedRoute, private ss: StudentsService, private router: Router) {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.studentsCollRef = this.ss.getStudents(this.id).subscribe(data => {
+    this.group = this.route.snapshot.paramMap.get('id');
+    this.studentsCollRef = this.ss.getStudents(this.group).subscribe(data => {
       if (data !== null || data !== undefined) {
         this.students = data;
         this.isEmpty = data.length > 0;

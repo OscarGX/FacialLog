@@ -1,19 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Student } from '../models/student.model';
 
 @Pipe({
   name: 'studentsFilter'
 })
 export class StudentsFilterPipe implements PipeTransform {
 
-  transform(students: Student[], qry: string, filterBy: string): Student[] {
+  transform(array: any[], qry: string, filterBy: string): any[] {
     qry = qry.toLowerCase();
-    return students.filter(student => student[filterBy].toLowerCase().includes(qry));
+    return array.filter(item => item[filterBy].toLowerCase().includes(qry));
   }
-
-  /* private filterBy(studentsArray: Student[], filter: string, qry: string) {
-    qry = qry.toLowerCase();
-    return studentsArray.filter(student => student[filter].toLowerCase().includes(qry));
-  } */
 
 }

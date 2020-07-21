@@ -15,7 +15,7 @@ export class StudentsService {
   }
 
   getStudents(id: string) {
-    return this.db.collection<Student>('students', ref => ref.where('career', '==', id)).snapshotChanges()
+    return this.db.collection<Student>('students', ref => ref.where('group', '==', id)).snapshotChanges()
             .pipe(map((res: DocumentChangeAction<Student>[]) => res.map(doc => {
               const data = doc.payload.doc.data() as Student;
               data.id = doc.payload.doc.id;
